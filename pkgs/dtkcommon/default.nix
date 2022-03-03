@@ -1,6 +1,5 @@
 { stdenv
 , lib
-, mkDerivation
 , fetchFromGitHub
 , pkgconfig
 , qmake
