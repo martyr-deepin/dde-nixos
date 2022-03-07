@@ -6,6 +6,7 @@ let
   
   packages = self: with self; {
     deepin-desktop-base = callPackage ./pkgs/deepin-desktop-base { };
+    dde-qt-dbus-factory = callPackage ./pkgs/dde-qt-dbus-factory { };
     dtkcommon = callPackage ./pkgs/dtkcommon { };
     dtkcore = callPackage ./pkgs/dtkcore { };
     dtkgui = callPackage ./pkgs/dtkgui { };
