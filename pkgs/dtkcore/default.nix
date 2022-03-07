@@ -37,7 +37,6 @@ stdenv.mkDerivation rec {
   ];
 
   qmakeFlags = [
-    "DTK_VERSION=${version}"
     "LIB_INSTALL_DIR=${placeholder "out"}/lib"
     "MKSPECS_INSTALL_DIR=${placeholder "out"}/mkspecs"
   ];
@@ -45,7 +44,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Deepin tool kit core library";
     homepage = "https://github.com/linuxdeepin/dtkcore";
-    license = licenses.gpl3Plus;
+    license = licenses.lgpl3Plus;
     platforms = platforms.linux;
   };
 }
