@@ -25,6 +25,8 @@ stdenv.mkDerivation rec {
     wrapQtAppsHook
   ];
 
+  patches = [ ./0001-dtk_lib-disable-examples-subdirs.patch ];
+
   postPatch = ''
     substituteInPlace dtkcommon.pro \
         --replace '$${getQtMacroFromQMake(QT_INSTALL_LIBS)}'      $out/lib \
