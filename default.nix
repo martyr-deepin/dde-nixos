@@ -10,6 +10,7 @@ let
     dtkcommon = callPackage ./pkgs/dtkcommon { };
     dtkcore = callPackage ./pkgs/dtkcore { };
     dtkgui = callPackage ./pkgs/dtkgui { };
+    dtkwidget = callPackage ./pkgs/dtkwidget { };
   };
 in
 makeScope libsForQt5.newScope packages
