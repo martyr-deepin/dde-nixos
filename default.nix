@@ -11,6 +11,7 @@ let
     dtkcore = callPackage ./pkgs/dtkcore { };
     dtkgui = callPackage ./pkgs/dtkgui { };
     dtkwidget = callPackage ./pkgs/dtkwidget { };
+    qt5dxcb-plugin = callPackage ./pkgs/qt5dxcb-plugin { };
   };
 in
 makeScope libsForQt5.newScope packages
