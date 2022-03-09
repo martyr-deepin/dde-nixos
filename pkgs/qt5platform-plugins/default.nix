@@ -47,7 +47,7 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "Qt platform integration plugin for DDE";
+    description = "Qt platform plugins for DDE";
     homepage = "https://github.com/linuxdeepin/qt5platform-plugins";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
