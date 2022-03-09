@@ -12,6 +12,7 @@ let
     dtkgui = callPackage ./pkgs/dtkgui { };
     dtkwidget = callPackage ./pkgs/dtkwidget { };
     qt5platform-plugins = callPackage ./pkgs/qt5platform-plugins { };
+    qt5integration = callPackage ./pkgs/qt5integration { };
   };
 in
 makeScope libsForQt5.newScope packages
