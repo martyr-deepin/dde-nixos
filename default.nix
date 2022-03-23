@@ -15,6 +15,7 @@ let
     qt5integration = callPackage ./pkgs/qt5integration { };
     #deepin-album = callPackage ./pkgs/deepin-album { };
     deepin-boot-maker = callPackage ./pkgs/deepin-boot-maker { };
+    deepin-calculator = callPackage ./pkgs/deepin-calculator { };
   };
 in
 makeScope libsForQt5.newScope packages
