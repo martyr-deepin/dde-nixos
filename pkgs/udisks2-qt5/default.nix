@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "UDisks2 D-Bus interfaces binding for Qt5";
     homepage = "https://github.com/linuxdeepin/udisks2-qt5";
-    license = licenses.gpl3Plus;
+    license = licenses.lgpl3Plus;
     platforms = platforms.linux;
   };
 }
