@@ -13,7 +13,8 @@ let
     dtkwidget = callPackage ./pkgs/dtkwidget { };
     qt5platform-plugins = callPackage ./pkgs/qt5platform-plugins { };
     qt5integration = callPackage ./pkgs/qt5integration { };
-    #deepin-album = callPackage ./pkgs/deepin-album { };
+    image-editor = callPackage ./pkgs/image-editor { };
+    deepin-album = callPackage ./pkgs/deepin-album { };
     deepin-boot-maker = callPackage ./pkgs/deepin-boot-maker { };
     deepin-calculator = callPackage ./pkgs/deepin-calculator { };
   };
