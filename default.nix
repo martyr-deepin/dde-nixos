@@ -14,6 +14,7 @@ let
     qt5platform-plugins = callPackage ./pkgs/qt5platform-plugins { };
     qt5integration = callPackage ./pkgs/qt5integration { };
     image-editor = callPackage ./pkgs/image-editor { };
+    udisks2-qt5 = callPackage ./pkgs/udisks2-qt5 { };
     deepin-album = callPackage ./pkgs/deepin-album { };
     deepin-boot-maker = callPackage ./pkgs/deepin-boot-maker { };
     deepin-calculator = callPackage ./pkgs/deepin-calculator { };
