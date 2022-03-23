@@ -1,6 +1,10 @@
 { stdenv
 , lib
 , fetchFromGitHub
+, dtkcommon
+, dtkcore
+, dtkgui
+, dtkwidget
 , qmake
 , pkgconfig
 , qtbase
@@ -8,14 +12,10 @@
 , qtx11extras
 , wrapQtAppsHook
 , qt5integration
-,    mtools
-,    p7zip
-,    syslinux
+, mtools
+, p7zip
+, syslinux
 , gtest
-, dtkcore
-, dtkgui
-, dtkwidget
-, dtkcommon
 }:
 
 stdenv.mkDerivation rec {
@@ -36,13 +36,13 @@ stdenv.mkDerivation rec {
     dtkgui
     dtkwidget
     dtkcommon
+    qttools
+    qtx11extras
+    qt5integration
     mtools
     p7zip
     syslinux
     gtest
-    qttools
-    qtx11extras
-    qt5integration
   ];
 
   qmakeFlags = [
@@ -50,8 +50,10 @@ stdenv.mkDerivation rec {
   ];
 
   postPatch = ''
-    substituteInPlace src/src.pro --replace "/usr/share/deepin-boot-maker/translations" "$out/share/deepin-boot-maker/translations"
-    substituteInPlace deepin-boot-maker.pro --replace "/usr/share/deepin-manual/manual-assets/application" "$out/share/deepin-manual/manual-assets/application"
+    substituteInPlace src/src.pro \
+      --replace "/usr/share/deepin-boot-maker/translations" "$out/share/deepin-boot-maker/translations"
+    substituteInPlace deepin-boot-maker.pro \
+      --replace "/usr/share/deepin-manual/manual-assets/application" "$out/share/deepin-manual/manual-assets/application"
   '';
 
   meta = with lib; {
