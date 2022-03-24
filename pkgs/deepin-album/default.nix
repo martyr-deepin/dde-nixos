@@ -15,7 +15,10 @@
 , wrapQtAppsHook
 , glibmm
 , freeimage
+, opencv
+, ffmpeg
 , ffmpegthumbnailer
+, breakpointHook
 }:
 
 stdenv.mkDerivation rec {
@@ -29,7 +32,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-FPO7tKSCF7P5Rq7D5etxTb2PowYcCrtCL5bnIcruHPo=";
   };
 
-  nativeBuildInputs = [ cmake pkgconfig qttools wrapQtAppsHook ];
+  nativeBuildInputs = [ cmake pkgconfig qttools wrapQtAppsHook breakpointHook ];
 
   buildInputs = [
     dtkcommon
@@ -42,8 +45,24 @@ stdenv.mkDerivation rec {
     image-editor
     glibmm
     freeimage
+    opencv
+    ffmpeg
     ffmpegthumbnailer
   ];
+
+  cmakeFlags = [
+    "-DCMAKE_INSTALL_PREFIX=$out"
+    "-DCMAKE_INSTALL_LIBDIR=lib"
+  ];
+
+  postPatch = ''
+    substituteInPlace src/CMakeLists.txt \
+      --replace "set(PREFIX /usr)" "set(PREFIX $out)" \
+      --replace "/usr/share/deepin-manual/manual-assets/application/)" "share/deepin-manual/manual-assets/application/)"
+
+    substituteInPlace libUnionImage/CMakeLists.txt \
+      --replace "set(PREFIX /usr)" "set(PREFIX $out)" \
+  '';
 
   meta = with lib; {
     description = "A fashion photo manager for viewing and organizing pictures";
