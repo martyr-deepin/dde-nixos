@@ -2,7 +2,7 @@
 let 
   makeScope = pkgs.lib.makeScope;
 
-  libsForQt5 = pkgs.libsForQt5;
+  newScope = pkgs.libsForQt5.newScope;
   
   packages = self: with self; {
     deepin-desktop-base = callPackage ./pkgs/deepin-desktop-base { };
@@ -16,9 +16,10 @@ let
     image-editor = callPackage ./pkgs/image-editor { };
     gio-qt = callPackage ./pkgs/gio-qt { };
     udisks2-qt5 = callPackage ./pkgs/udisks2-qt5 { };
+    deepin-gettext-tools = callPackage ./pkgs/deepin-gettext-tools { };
     deepin-album = callPackage ./pkgs/deepin-album { };
     deepin-boot-maker = callPackage ./pkgs/deepin-boot-maker { };
     deepin-calculator = callPackage ./pkgs/deepin-calculator { };
   };
 in
-makeScope libsForQt5.newScope packages
+makeScope newScope packages
