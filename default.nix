@@ -18,6 +18,7 @@ let
     udisks2-qt5 = callPackage ./pkgs/udisks2-qt5 { };
     deepin-gettext-tools = callPackage ./pkgs/deepin-gettext-tools { };
     deepin-album = callPackage ./pkgs/deepin-album { };
+    deepin-image-viewer = callPackage ./pkgs/deepin-image-viewer { };
     deepin-boot-maker = callPackage ./pkgs/deepin-boot-maker { };
     deepin-calculator = callPackage ./pkgs/deepin-calculator { };
   };
