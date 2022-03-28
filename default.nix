@@ -21,6 +21,8 @@ let
     deepin-image-viewer = callPackage ./pkgs/deepin-image-viewer { };
     deepin-boot-maker = callPackage ./pkgs/deepin-boot-maker { };
     deepin-calculator = callPackage ./pkgs/deepin-calculator { };
+    deepin-devicemanager = callPackage ./pkgs/deepin-devicemanager { };
+    deepin-font-manager = callPackage ./pkgs/deepin-font-manager { };
   };
 in
 makeScope newScope packages
