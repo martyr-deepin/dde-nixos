@@ -23,6 +23,10 @@ let
     deepin-calculator = callPackage ./pkgs/deepin-calculator { };
     deepin-devicemanager = callPackage ./pkgs/deepin-devicemanager { };
     deepin-font-manager = callPackage ./pkgs/deepin-font-manager { };
+    dde-clipboard = callPackage ./pkgs/dde-clipboard { };
+
+    # kde package
+    libqtapt = callPackage ./pkgs/libqtapt { };
   };
 in
 makeScope newScope packages
