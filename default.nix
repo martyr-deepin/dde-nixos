@@ -24,6 +24,7 @@ let
     deepin-devicemanager = callPackage ./pkgs/deepin-devicemanager { };
     deepin-font-manager = callPackage ./pkgs/deepin-font-manager { };
     dde-clipboard = callPackage ./pkgs/dde-clipboard { };
+    deepin-system-monitor = callPackage ./pkgs/deepin-system-monitor { };
 
     # kde package
     libqtapt = callPackage ./pkgs/libqtapt { };
