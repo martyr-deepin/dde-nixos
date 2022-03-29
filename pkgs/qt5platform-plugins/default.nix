@@ -1,6 +1,7 @@
 { stdenv
 , lib
 , fetchFromGitHub
+, fetchpatch
 , qmake
 , pkgconfig
 , qtbase
@@ -36,15 +37,20 @@ stdenv.mkDerivation rec {
     "PREFIX=${placeholder "out"}"
   ];
 
-  postPatch = ''
-    rm -r xcb/libqt5xcbqpa-dev/
-    mkdir -p xcb/libqt5xcbqpa-dev/${qtbase.version}
-    cp -r ${qtbase.src}/src/plugins/platforms/xcb/*.h xcb/libqt5xcbqpa-dev/${qtbase.version}/
-  ''
-  + ''
+  patches = [
+    (fetchpatch {
+      url = "https://github.com/linuxdeepin/qt5platform-plugins/commit/71bbc04210b27bcd416da667291f77b762eaea80.patch";
+      sha256 = "sha256-INuMWMPXPMLGO9IvEY9RHNAN2UnTFsTj3owUVMZRY2o=";
+      name = "Add_support_for_Qt_5_15-3_patch";
+    })
+  ];
+
+  noWaylandPatch = ''
     rm -r wayland
     sed -i '/wayland/d' qt5platform-plugins.pro
   '';
+
+  postPatch = noWaylandPatch;
 
   meta = with lib; {
     description = "Qt platform plugins for DDE";
