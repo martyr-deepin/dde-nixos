@@ -10,6 +10,7 @@
 , mtdev
 , cairo
 , xorg
+, waylandSupport ? false
 }:
 
 stdenv.mkDerivation rec {
@@ -34,7 +35,7 @@ stdenv.mkDerivation rec {
   ];
 
   qmakeFlags = [
-    "PREFIX=${placeholder "out"}"
+    #"PREFIX=${placeholder "out"}"
   ];
 
   patches = [
@@ -50,7 +51,23 @@ stdenv.mkDerivation rec {
     sed -i '/wayland/d' qt5platform-plugins.pro
   '';
 
-  postPatch = noWaylandPatch;
+  fixXcbInstallPatch = ''
+    substituteInPlace xcb/xcb.pro \
+      --replace "DESTDIR = \$\$_PRO_FILE_PWD_/../bin/plugins/platforms
+    " "DESTDIR = $out/bin/plugins/platforms"
+  '';
+
+  fixWaylandInstallPatch = ''
+    substituteInPlace wayland/wayland-shell/wayland-shell.pro \
+      --replace "DESTDIR = \$\$_PRO_FILE_PWD_/../../bin/plugins/wayland-shell-integration" "DESTDIR = $out/bin/plugins/wayland-shell-integration"
+
+    substituteInPlace wayland/dwayland/dwayland.pro \
+      --replace "DESTDIR = \$\$_PRO_FILE_PWD_/../../bin/plugins/platforms" "DESTDIR = $out/bin/plugins/platforms"
+   '';
+
+   postPatch = fixXcbInstallPatch 
+              + lib.optionalString (!waylandSupport) noWaylandPatch
+              + lib.optionalString waylandSupport fixWaylandInstallPatch;
 
   meta = with lib; {
     description = "Qt platform plugins for DDE";
