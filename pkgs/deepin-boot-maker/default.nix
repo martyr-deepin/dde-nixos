@@ -29,14 +29,18 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-UpbU1mFQGCNnf2jusa6Q5wJyMzOQLa1z0txuSqxJRH0=";
   };
 
-  nativeBuildInputs = [ qmake pkgconfig wrapQtAppsHook ];
+  nativeBuildInputs = [ 
+    qmake
+    qttools
+    pkgconfig
+    wrapQtAppsHook 
+  ];
 
   buildInputs = [
     dtkcore
     dtkgui
     dtkwidget
     dtkcommon
-    qttools
     qtx11extras
     qt5integration
     mtools

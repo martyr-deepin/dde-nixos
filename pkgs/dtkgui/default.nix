@@ -24,16 +24,16 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     qmake
+    qttools
     pkgconfig
     wrapQtAppsHook
   ];
 
   buildInputs = [
-    qttools
-    librsvg
-    gtest
     dtkcore
     dtkcommon
+    librsvg
+    gtest
   ];
 
   qmakeFlags = [

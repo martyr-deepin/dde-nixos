@@ -22,9 +22,16 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [
     qmake
     pkgconfig
+    qttools
     wrapQtAppsHook
   ];
+  
+  buildInputs = [
+    qtbase
+  ];
 
+  qmakeFlags = [ "PREFIX=${placeholder "out"}" ];
+  
   patches = [ ./0001-dtk_lib-disable-examples-subdirs.patch ];
 
   postPatch = ''
@@ -32,14 +39,6 @@ stdenv.mkDerivation rec {
         --replace '$${getQtMacroFromQMake(QT_INSTALL_LIBS)}'      $out/lib \
         --replace '$${getQtMacroFromQMake(QT_INSTALL_ARCHDATA)}'  $out
   '';
-
-
-  qmakeFlags = [ "PREFIX=${placeholder "out"}" ];
-
-  buildInputs = [
-    qtbase
-    qttools
-  ];
 
   meta = with lib; {
     description = "A public project for building DTK Library";

@@ -1,6 +1,10 @@
 { stdenv
 , lib
 , fetchFromGitHub
+, dtkcore
+, dtkgui
+, dtkcommon
+, dde-qt-dbus-factory
 , pkgconfig
 , qmake
 , qttools
@@ -13,10 +17,6 @@
 , gsettings-qt
 , librsvg
 , libstartup_notification
-, dtkcore
-, dtkgui
-, dtkcommon
-, dde-qt-dbus-factory
 }:
 
 stdenv.mkDerivation rec {
@@ -32,12 +32,12 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     qmake
+    qttools
     pkgconfig
     wrapQtAppsHook
   ];
 
   buildInputs = [
-    qttools
     qtmultimedia
     qtsvg
     qtx11extras
