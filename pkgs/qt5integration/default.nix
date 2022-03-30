@@ -38,6 +38,10 @@ stdenv.mkDerivation rec {
     lxqt.libqtxdg
   ];
 
+  installPhase = ''
+    cp -r bin $out
+  '';
+
   meta = with lib; {
     description = "Qt platform theme integration plugins for DDE";
     homepage = "https://github.com/linuxdeepin/qt5integration";
