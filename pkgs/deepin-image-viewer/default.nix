@@ -6,6 +6,7 @@
 , dtkgui
 , dtkwidget
 , qt5integration
+, qt5platform-plugins
 , gio-qt
 , udisks2-qt5
 , image-editor
@@ -54,6 +55,11 @@ stdenv.mkDerivation rec {
   ];
 
   cmakeFlags = [ "-DCMAKE_INSTALL_PREFIX=${placeholder "out"}" ];
+
+  qtWrapperArgs = [
+    "--prefix QT_PLUGIN_PATH : ${qt5integration}/plugins"
+    "--prefix QT_PLUGIN_PATH : ${qt5platform-plugins}/plugins"
+  ];
 
   patches = [ ./0001-fix-fhs-path-for-nix.patch ];
 

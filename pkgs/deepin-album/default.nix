@@ -6,6 +6,7 @@
 , dtkgui
 , dtkwidget
 , qt5integration
+, qt5platform-plugins
 , udisks2-qt5
 , gio-qt
 , image-editor
@@ -47,6 +48,11 @@ stdenv.mkDerivation rec {
     opencv
     ffmpeg
     ffmpegthumbnailer
+  ];
+
+  qtWrapperArgs = [
+    "--prefix QT_PLUGIN_PATH : ${qt5integration}/plugins"
+    "--prefix QT_PLUGIN_PATH : ${qt5platform-plugins}/plugins"
   ];
 
   postPatch = ''

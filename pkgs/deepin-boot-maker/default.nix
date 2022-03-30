@@ -12,6 +12,7 @@
 , qtx11extras
 , wrapQtAppsHook
 , qt5integration
+, qt5platform-plugins
 , mtools
 , p7zip
 , syslinux
@@ -51,6 +52,11 @@ stdenv.mkDerivation rec {
 
   qmakeFlags = [
     "PREFIX=${placeholder "out"}"
+  ];
+
+  qtWrapperArgs = [
+    "--prefix QT_PLUGIN_PATH : ${qt5integration}/plugins"
+    "--prefix QT_PLUGIN_PATH : ${qt5platform-plugins}/plugins"
   ];
 
   postPatch = ''

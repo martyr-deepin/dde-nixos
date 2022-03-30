@@ -6,6 +6,7 @@
 , dtkwidget
 , dtkcommon
 , qt5integration
+, qt5platform-plugins
 , dde-qt-dbus-factory
 , cmake
 , qttools
@@ -41,6 +42,11 @@ stdenv.mkDerivation rec {
     qt5integration
     dde-qt-dbus-factory
     gtest
+  ];
+
+  qtWrapperArgs = [
+    "--prefix QT_PLUGIN_PATH : ${qt5integration}/plugins"
+    "--prefix QT_PLUGIN_PATH : ${qt5platform-plugins}/plugins"
   ];
 
   postPatch = ''
