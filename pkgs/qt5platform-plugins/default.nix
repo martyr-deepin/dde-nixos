@@ -54,15 +54,15 @@ stdenv.mkDerivation rec {
   fixXcbInstallPatch = ''
     substituteInPlace xcb/xcb.pro \
       --replace "DESTDIR = \$\$_PRO_FILE_PWD_/../bin/plugins/platforms
-    " "DESTDIR = $out/bin/plugins/platforms"
+    " "DESTDIR = $out/plugins/platforms"
   '';
 
   fixWaylandInstallPatch = ''
     substituteInPlace wayland/wayland-shell/wayland-shell.pro \
-      --replace "DESTDIR = \$\$_PRO_FILE_PWD_/../../bin/plugins/wayland-shell-integration" "DESTDIR = $out/bin/plugins/wayland-shell-integration"
+      --replace "DESTDIR = \$\$_PRO_FILE_PWD_/../../bin/plugins/wayland-shell-integration" "DESTDIR = $out/plugins/wayland-shell-integration"
 
     substituteInPlace wayland/dwayland/dwayland.pro \
-      --replace "DESTDIR = \$\$_PRO_FILE_PWD_/../../bin/plugins/platforms" "DESTDIR = $out/bin/plugins/platforms"
+      --replace "DESTDIR = \$\$_PRO_FILE_PWD_/../../bin/plugins/platforms" "DESTDIR = $out/plugins/platforms"
    '';
 
    postPatch = fixXcbInstallPatch 
