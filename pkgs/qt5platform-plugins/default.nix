@@ -34,10 +34,6 @@ stdenv.mkDerivation rec {
     xorg.libSM
   ];
 
-  qmakeFlags = [
-    #"PREFIX=${placeholder "out"}"
-  ];
-
   patches = [
     (fetchpatch {
       url = "https://github.com/linuxdeepin/qt5platform-plugins/commit/71bbc04210b27bcd416da667291f77b762eaea80.patch";
