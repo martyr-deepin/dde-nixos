@@ -5,6 +5,8 @@
 , dtkgui
 , dtkwidget
 , dtkcommon
+, qt5integration
+, qt5platform-plugins
 , cmake
 , qttools
 , pkgconfig
@@ -40,6 +42,11 @@ stdenv.mkDerivation rec {
     fontconfig
     freetype
     gtest
+  ];
+
+  qtWrapperArgs = [
+    "--prefix QT_PLUGIN_PATH : ${qt5integration}/plugins"
+    "--prefix QT_PLUGIN_PATH : ${qt5platform-plugins}/plugins"
   ];
 
   #TODO: deepin-font-preview-plugin need dde-file-manger
