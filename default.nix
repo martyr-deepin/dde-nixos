@@ -24,6 +24,7 @@ let
     deepin-font-manager = callPackage ./pkgs/deepin-font-manager { };
     dde-clipboard = callPackage ./pkgs/dde-clipboard { };
     deepin-system-monitor = callPackage ./pkgs/deepin-system-monitor { };
+    deepin-icon-theme = callPackage ./pkgs/deepin-icon-theme { };
 
     # break, need fix
     deepin-camera = callPackage ./pkgs/deepin-camera { };
