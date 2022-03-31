@@ -26,6 +26,9 @@ let
     dde-clipboard = callPackage ./pkgs/dde-clipboard { };
     deepin-system-monitor = callPackage ./pkgs/deepin-system-monitor { };
 
+    # break, need fix
+    deepin-camera = callPackage ./pkgs/deepin-camera { };
+
     # kde package
     libqtapt = callPackage ./pkgs/libqtapt { };
   };
