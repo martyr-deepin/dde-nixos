@@ -25,6 +25,7 @@ let
     dde-clipboard = callPackage ./pkgs/dde-clipboard { };
     deepin-system-monitor = callPackage ./pkgs/deepin-system-monitor { };
     deepin-icon-theme = callPackage ./pkgs/deepin-icon-theme { };
+    deepin-anything = callPackage ./pkgs/deepin-anything { };
 
     # break, need fix
     deepin-camera = callPackage ./pkgs/deepin-camera { };
