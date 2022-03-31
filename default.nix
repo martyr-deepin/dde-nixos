@@ -21,13 +21,13 @@ let
     deepin-image-viewer = callPackage ./pkgs/deepin-image-viewer { };
     deepin-boot-maker = callPackage ./pkgs/deepin-boot-maker { };
     deepin-calculator = callPackage ./pkgs/deepin-calculator { };
-    deepin-devicemanager = callPackage ./pkgs/deepin-devicemanager { };
     deepin-font-manager = callPackage ./pkgs/deepin-font-manager { };
     dde-clipboard = callPackage ./pkgs/dde-clipboard { };
     deepin-system-monitor = callPackage ./pkgs/deepin-system-monitor { };
 
     # break, need fix
     deepin-camera = callPackage ./pkgs/deepin-camera { };
+    deepin-devicemanager = callPackage ./pkgs/deepin-devicemanager { };
 
     # kde package
     libqtapt = callPackage ./pkgs/libqtapt { };
