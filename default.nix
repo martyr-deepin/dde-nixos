@@ -26,6 +26,7 @@ let
     deepin-system-monitor = callPackage ./pkgs/deepin-system-monitor { };
     deepin-icon-theme = callPackage ./pkgs/deepin-icon-theme { };
     deepin-anything = callPackage ./pkgs/deepin-anything { };
+    dmarked = callPackage ./pkgs/dmarked { };
 
     # break, need fix
     deepin-camera = callPackage ./pkgs/deepin-camera { };
