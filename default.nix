@@ -27,6 +27,8 @@ let
     deepin-icon-theme = callPackage ./pkgs/deepin-icon-theme { };
     deepin-anything = callPackage ./pkgs/deepin-anything { };
     dmarked = callPackage ./pkgs/dmarked { };
+    deepin-picker = callPackage ./pkgs/deepin-picker { };
+    deepin-draw = callPackage ./pkgs/deepin-draw { };
 
     # break, need fix
     deepin-camera = callPackage ./pkgs/deepin-camera { };
