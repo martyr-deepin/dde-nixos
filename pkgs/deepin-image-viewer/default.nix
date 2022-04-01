@@ -43,7 +43,6 @@ stdenv.mkDerivation rec {
     dtkcore
     dtkgui
     dtkwidget
-    qt5integration
     gio-qt
     udisks2-qt5
     image-editor

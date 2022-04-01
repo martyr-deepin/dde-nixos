@@ -43,7 +43,6 @@ stdenv.mkDerivation rec {
     dtkwidget
     dtkcommon
     qtx11extras
-    qt5integration
     mtools
     p7zip
     syslinux

@@ -6,6 +6,7 @@
 , dtkwidget
 , dtkcommon
 , qt5integration
+, qt5platform-plugins
 , dde-qt-dbus-factory
 , cmake
 , qttools
@@ -41,12 +42,16 @@ stdenv.mkDerivation rec {
     dtkcore
     dtkgui
     dtkwidget
-    qt5integration
     dde-qt-dbus-factory
     polkit-qt
     libqtapt
     kmod
     gtest
+  ];
+
+  qtWrapperArgs = [
+    "--prefix QT_PLUGIN_PATH : ${qt5integration}/plugins"
+    "--prefix QT_PLUGIN_PATH : ${qt5platform-plugins}/plugins"
   ];
 
   postPatch = ''
@@ -60,5 +65,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/linuxdeepin/deepin-devicemanager";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
+    broken = true;
   };
 }

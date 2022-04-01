@@ -6,6 +6,7 @@
 , dtkwidget
 , dtkcommon
 , qt5integration
+, qt5platform-plugins
 , dde-qt-dbus-factory
 , gio-qt
 , cmake
@@ -40,12 +41,16 @@ stdenv.mkDerivation rec {
     dtkgui
     dtkwidget
     dtkcommon
-    qt5integration
     dde-qt-dbus-factory
     gio-qt
     kwayland
     glibmm
     gtest
+  ];
+
+  qtWrapperArgs = [
+    "--prefix QT_PLUGIN_PATH : ${qt5integration}/plugins"
+    "--prefix QT_PLUGIN_PATH : ${qt5platform-plugins}/plugins"
   ];
 
   patches = [ ./0001-remove-support-waylandcopy-client.patch ]; 

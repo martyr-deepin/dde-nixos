@@ -39,7 +39,6 @@ stdenv.mkDerivation rec {
     dtkcore
     dtkgui
     dtkwidget
-    qt5integration
     dde-qt-dbus-factory
     gtest
   ];
