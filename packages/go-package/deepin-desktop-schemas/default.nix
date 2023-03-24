@@ -12,8 +12,8 @@ buildGoModule rec {
   src = fetchFromGitHub {
     owner = "wineee";
     repo = pname;
-    rev = "19b172d0479706614805cb082bf635269b28f054";
-    sha256 = "sha256-LkGqP9fnV2+Lbl/QsEjOTSviujwxbiC86e6Gsc1GkyM=";
+    rev = "1e5a8b203f0e010b531cd8fbc050db133f7bb88d";
+    sha256 = "sha256-Ez7kSrFefAsWSfnF6neCNMhKc7/wBLbc1vn8+Y4LLYY=";
   };
 
   vendorSha256 = "sha256-IoJDa1YNGL18I5xQZBDds0muIu8yGXOV8SFQYiQSYdk=";
@@ -25,8 +25,6 @@ buildGoModule rec {
       substituteInPlace $file \
         --replace "/usr/share" "/run/current-system/sw/share"
     done
-
-    substituteInPlace Makefile --replace "env GO111MODULE=off" " "
   '';
 
   buildPhase = ''
