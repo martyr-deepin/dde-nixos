@@ -1,26 +1,22 @@
 { stdenv
 , lib
+, buildGoModule
 , fetchFromGitHub
-, buildGoPackage
 , go
-, go-lib
 , glib
 }:
-buildGoPackage rec {
+buildGoModule rec {
   pname = "deepin-desktop-schemas";
-  version = "5.10.11";
-
-  goPackagePath = "github.com/linuxdeepin/deepin-desktop-schemas";
+  version = "6.0.0";
 
   src = fetchFromGitHub {
-    owner = "linuxdeepin";
+    owner = "wineee";
     repo = pname;
-    rev = version;
-    sha256 = "sha256-MboNj0zC3azavDUsmeNNafCcUa0GeoySl610+WOtNww=";
+    rev = "19b172d0479706614805cb082bf635269b28f054";
+    sha256 = "sha256-LkGqP9fnV2+Lbl/QsEjOTSviujwxbiC86e6Gsc1GkyM=";
   };
 
-  nativeBuildInputs = [ glib ];
-  buildInputs = [ go-lib ];
+  vendorSha256 = "sha256-IoJDa1YNGL18I5xQZBDds0muIu8yGXOV8SFQYiQSYdk=";
 
   postPatch = ''
     # Relocate files path for backgrounds and wallpapers
@@ -29,21 +25,27 @@ buildGoPackage rec {
       substituteInPlace $file \
         --replace "/usr/share" "/run/current-system/sw/share"
     done
+
+    substituteInPlace Makefile --replace "env GO111MODULE=off" " "
   '';
 
   buildPhase = ''
     runHook preBuild
-    GOPATH="$GOPATH:${go-lib}/share/gocode"
-    make ARCH=${stdenv.targetPlatform.linuxArch} -C go/src/${goPackagePath}
+    make ARCH=${stdenv.targetPlatform.linuxArch}
     runHook postBuild
   '';
 
-  installPhase = ''
-    make install DESTDIR="$out" PREFIX="/" -C go/src/${goPackagePath}
+  nativeCheckInputs = [ glib ];
+  checkPhase = ''
+    runHook preCheck
+    glib-compile-schemas --dry-run result
+    runHook postCheck
   '';
 
-  preFixup = ''
-    glib-compile-schemas ${glib.makeSchemaPath "$out" "${pname}-${version}"}
+  installPhase = ''
+    runHook preInstall
+    make install DESTDIR="$out" PREFIX="/"
+    runHook postInstall
   '';
 
   meta = with lib; {
