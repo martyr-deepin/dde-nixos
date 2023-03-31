@@ -64,10 +64,6 @@ buildGoModule rec {
   ];
 
   buildInputs = [
-    go-dbus-factory
-    go-gir-generator
-    go-lib
-    dde-api
     ddcutil
     linux-pam
     libxcrypt
