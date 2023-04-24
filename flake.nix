@@ -91,9 +91,6 @@
 
                   services.udisks2.enable = true;
                   services.upower.enable = mkDefault config.powerManagement.enable;
-                  # services.tumbler.enable = mkDefault true;
-                  
-                  # services.power-profiles-daemon.enable = true;
                   networking.networkmanager.enable = mkDefault true;
                   
                   programs.dconf.enable = true;
@@ -134,25 +131,6 @@
                     LogoTransparent=${pkgs.deepin.deepin-desktop-base}/share/pixmaps/distribution_logo_transparent.svg
                   '';
                   environment.etc = {
-                    #"X11/Xsession.d".source = "${packages.startdde}/etc/X11/Xsession.d";
-                    #"dde-session-shell/dde-session-shell.conf".source = "${pkgs.deepin.dde-session-shell}/share/dde-session-shell/dde-session-shell.conf";
-                    #"deepin/greeters.d".source = "${pkgs.deepin.dde-session-shell}/etc/deepin/greeters.d";
-                    #"dde-dock/indicator".source = "${pkgs.deepin.dde-dock}/etc/dde-dock/indicator";
-                    #"polkit-1/localauthority/10-vendor.d/10-network-manager.pkla".source = "${pkgs.deepin.dde-network-core}/var/lib/polkit-1/localauthority/10-vendor.d/10-network-manager.pkla";
-                    # "deepin/dde.conf".text = ''
-                    #   [Password]
-                    #   STRONG_PASSWORD = true
-                    #   PASSWORD_MIN_LENGTH = 1
-                    #   PASSWORD_MAX_LENGTH = 510
-                    #   VALIDATE_POLICY = 1234567890;abcdefghijklmnopqrstuvwxyz;ABCDEFGHIJKLMNOPQRSTUVWXYZ;~`!@#$%^&*()-_+=|\{}[]:"'<>,.?/
-                    #   VALIDATE_REQUIRED = 1
-                    #   PALINDROME_NUM = 0
-                    #   WORD_CHECK = 0
-                    #   MONOTONE_CHARACTER_NUM = 0
-                    #   CONSECUTIVE_SAME_CHARACTER_NUM = 0
-                    #   DICT_PATH = 
-                    #   FIRST_LETTER_UPPERCASE = false
-                    # '';
                     "deepin-installer.conf".text = ''
                       system_info_vendor_name="Copyright (c) 2003-2023 NixOS contributors"
                     '';
@@ -223,7 +201,6 @@
                   ] ++ (with packages; (utils.removePackagesByName ([
                     #dde-kwin
                     #deepin-kwin
-                    
                   ]) config.environment.deepin.excludePackages));
 
 
@@ -271,16 +248,6 @@
                   services.udev.packages = [ pkgs.deepin.dde-daemon ];
                   systemd.packages = [ pkgs.deepin.dde-daemon ];
                   environment.pathsToLink = [ "/lib/deepin-daemon" ];
-                  #environment.etc= {
-                    #"lightdm/deepin/xsettingsd.conf".source = "${pkgs.deepin.dde-daemon}/etc/lightdm/deepin/xsettingsd.conf";
-                    #"pam.d/deepin-auth-keyboard"
-                    #"acpi/actions/deepin_lid.sh".source = "${packages.dde-daemon}/etc/acpi/actions/deepin_lid.sh";
-                    #"polkit-1/localauthority/10-vendor.d/com.deepin.daemon.Accounts.pkla".source = "${packages.dde-daemon}/var/lib/polkit-1/localauthority/10-vendor.d/com.deepin.daemon.Accounts.pkla";
-                    #"polkit-1/localauthority/10-vendor.d/com.deepin.daemon.Fprintd.pkla".source = "${packages.dde-daemon}/var/lib/polkit-1/localauthority/10-vendor.d/com.deepin.daemon.Fprintd.pkla";
-                    #"polkit-1/localauthority/10-vendor.d/com.deepin.daemon.Grub2.pkla".source = "${packages.dde-daemon}/var/lib/polkit-1/localauthority/10-vendor.d/com.deepin.daemon.Grub2.pkla";
-                  #};
-                  # security.pam.services.deepin-auth-keyboard.text = ''
-                  # '';
                   security.pam.services.dde-lock.text = ''
                     # original at {dde-session-shell}/etc/pam.d/dde-lock
                     auth      substack      login
@@ -304,7 +271,6 @@
                     group = "deepin-sound-player";
                     isSystemUser = true;
                   };
-                  #environment.etc."polkit-1/localauthority/10-vendor.d/com.deepin.api.device.pkla".source = "${pkgs.deepin.dde-api}/var/lib/polkit-1/localauthority/10-vendor.d/com.deepin.api.device.pkla";
                })
 
                (mkIf config.services.dde.app-services.enable {
