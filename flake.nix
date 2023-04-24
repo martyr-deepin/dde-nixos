@@ -5,7 +5,7 @@
   nixConfig.extra-trusted-public-keys = "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -115,12 +115,6 @@
                     DDE_POLKIT_AGENT_PLUGINS_DIRS = [ "${pkgs.deepin.dpa-ext-gnomekeyring}/lib/polkit-1-dde/plugins" ];
                   };
 
-                  environment.variables = {
-                    #QT_QPA_PLATFORMTHEME = "dxcb"; # nixos/modules/config/qt5.nix
-                    #QT_STYLE_OVERRIDE = "chameleon";
-                    # D_PROXY_ICON_ENGINE = "KIconEngine";
-                  };
-
                   environment.pathsToLink = [
                     "/lib/dde-dock/plugins"
                     "/lib/dde-control-center"
@@ -181,7 +175,7 @@
                     librsvg # dde-api use rsvg-convert
                     kde-gtk-config # deepin-api/gtk-thumbnailer need
                     lshw
-                    #libsForQt5.kglobalaccel
+                    libsForQt5.kglobalaccel
                     onboard # dde-dock plugin
                     xsettingsd # lightdm-deepin-greeter
                     qt5platform-plugins
@@ -222,13 +216,16 @@
                     deepin-shortcut-viewer
 
                     deepin-compressor
-
-                  ] ++ (with packages; (utils.removePackagesByName ([
-                    dde-kwin
-                    deepin-kwin
                     deepin-system-monitor
                     deepin-screen-recorder
+                    libsForQt5.kwin
+                    (writeShellScriptBin "kwin_no_scale" "${libsForQt5.kwin}/bin/kwin_x11")
+                  ] ++ (with packages; (utils.removePackagesByName ([
+                    #dde-kwin
+                    #deepin-kwin
+                    
                   ]) config.environment.deepin.excludePackages));
+
 
                   services.dbus.packages =  with pkgs; with deepin; [
                     deepin-pw-check
@@ -240,19 +237,22 @@
                     dde-session-ui
                     dde-session-shell
                   ] ++ (with packages; (utils.removePackagesByName ([
-                    dde-kwin
-                    deepin-kwin
-                   
+                    #dde-kwin
+                    #deepin-kwin
+                    libsForQt5.kwin
+
                     dde-file-manager
                     dde-calendar
                     #deepin-screen-recorder
                     #deepin-system-monitor
-                    deepin-camera
+                    #deepin-camera
                     dde-clipboard
                   ]) config.environment.deepin.excludePackages));
 
                   systemd.packages = with pkgs.deepin; [
-                    packages.deepin-kwin
+                    #packages.deepin-kwin
+                    pkgs.libsForQt5.kwin
+
                     dde-launcher
                     dde-file-manager
                     dde-calendar
