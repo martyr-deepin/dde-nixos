@@ -5,25 +5,27 @@
 , pkg-config
 , cmake
 , qttools
+, doxygen
 , wrapQtAppsHook
 , librsvg
 , lxqt
 , dtkcore
-, dtkcommon
+, qtbase
 , qtimageformats
 , freeimage
 , libraw
+, buildDocs ? true
 }:
 
 stdenv.mkDerivation rec {
   pname = "dtkgui";
-  version = "5.6.5";
+  version = "5.6.10";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
     rev = version;
-    sha256 = "sha256-DeusmlVaNLaRLYXqsUZu8HcP936LunmlEjyyjJAR0J8=";
+    sha256 = "sha256-4NHt/hLtt99LhWvBX9e5ueB5G86SXx553G6fyHZBXcE=";
   };
 
   nativeBuildInputs = [
@@ -31,9 +33,13 @@ stdenv.mkDerivation rec {
     qttools
     pkg-config
     wrapQtAppsHook
+  ] ++ lib.optional buildDocs [
+    doxygen
+    #qttools.dev
   ];
 
   buildInputs = [
+    qtbase
     lxqt.libqtxdg
     librsvg
     freeimage
@@ -47,16 +53,27 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DDVERSION=${version}"
-    "-DBUILD_DOCS=OFF"
+    "-DBUILD_DOCS=ON"
     "-DMKSPECS_INSTALL_DIR=${placeholder "out"}/mkspecs/modules"
+    "-DQCH_INSTALL_DESTINATION=${qtbase.qtDocPrefix}"
     "-DCMAKE_INSTALL_LIBDIR=lib"
     "-DCMAKE_INSTALL_INCLUDEDIR=include"
+    #"-DDTK_DISABLE_LIBRSVG=OFF" # librsvg
+    #"-DDTK_DISABLE_LIBXDG=OFF" # libqtxdg
+    #"-DDTK_DISABLE_EX_IMAGE_FORMAT=OFF" # freeimage
   ];
+
+  preConfigure = ''
+    # qt.qpa.plugin: Could not find the Qt platform plugin "minimal"
+    # A workaround is to set QT_PLUGIN_PATH explicitly
+    export QT_PLUGIN_PATH=${qtbase.bin}/${qtbase.qtPluginPrefix}
+  '';
 
   meta = with lib; {
     description = "Deepin Toolkit, gui module for DDE look and feel";
     homepage = "https://github.com/linuxdeepin/dtkgui";
     license = licenses.lgpl3Plus;
     platforms = platforms.linux;
+    maintainers = teams.deepin.members;
   };
 }

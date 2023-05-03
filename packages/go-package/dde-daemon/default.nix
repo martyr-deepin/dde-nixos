@@ -1,7 +1,7 @@
 { stdenv
 , lib
 , fetchFromGitHub
-, replaceAll
+, substituteAll
 , buildGoPackage
 , pkg-config
 , deepin-gettext-tools

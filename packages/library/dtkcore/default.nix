@@ -14,18 +14,16 @@
 , buildDocs ? true
 , withSystemd ? true
 }:
-let
-  onOffBool = b: if b then "ON" else "OFF";
-in
+
 stdenv.mkDerivation rec {
   pname = "dtkcore";
-  version = "5.6.5";
+  version = "5.6.10";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
     rev = version;
-    sha256 = "sha256-jOLQ8hMVz51YXSs4VXusHlB6jtPQay2lCJNlGgTX7d0=";
+    sha256 = "sha256-ge8DiJMSaZo7GeQEgnDbi5SLsLxtOQ/P5/9aBgaG7Ds=";
   };
 
   postPatch = ''
@@ -55,17 +53,16 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DDVERSION=${version}"
-    "-DBUILD_DOCS=ON"
-    "-DBUILD_EXAMPLES=${onOffBool buildDocs}"
+    "-DBUILD_DOCS=${if buildDocs then "ON" else "OFF"}"
+    "-DBUILD_EXAMPLES=OFF"
     "-DQCH_INSTALL_DESTINATION=${qtbase.qtDocPrefix}"
     "-DDSG_PREFIX_PATH='/run/current-system/sw'"
     "-DMKSPECS_INSTALL_DIR=${placeholder "out"}/mkspecs/modules"
     "-DCMAKE_INSTALL_LIBDIR=lib"
     "-DCMAKE_INSTALL_INCLUDEDIR=include"
     "-DD_DSG_APP_DATA_FALLBACK=/var/dsg/appdata"
-    "-DBUILD_WITH_SYSTEMD=${onOffBool withSystemd}"
+    "-DBUILD_WITH_SYSTEMD=${if withSystemd then "ON" else "OFF"}"
   ];
-
 
   preConfigure = ''
     # qt.qpa.plugin: Could not find the Qt platform plugin "minimal"

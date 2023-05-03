@@ -1,8 +1,6 @@
 { stdenv
 , lib
 , fetchFromGitHub
-, replaceAll
-, fetchpatch
 , runtimeShell
 , dtkwidget
 , qt5integration
@@ -10,7 +8,6 @@
 , dde-qt-dbus-factory
 , docparser
 , dde-dock
-, deepin-movie-reborn
 , cmake
 , qttools
 , qtx11extras
@@ -32,25 +29,27 @@
 , taglib
 , cryptsetup
 , glib
-, gst_all_1
 , qtbase
-, mpv
-, ffmpeg
 , util-dfm
 , deepin-pdfium
 , libuuid
+, libselinux
 , glibmm
+, pcre
+, udisks2
+, libisoburn
+, fetchpatch
 }:
 
 stdenv.mkDerivation rec {
   pname = "dde-file-manager";
-  version = "6.0.0";
+  version = "6.0.15";
 
   src = fetchFromGitHub {
-    owner = "BLumia";
+    owner = "linuxdeepin";
     repo = pname;
-    rev = "b3eb3655aaf6f53d70c08b2e86f4d372a4b298b3";
-    sha256 = "sha256-fUL9aYzjrsGFfqyeTEqYnw47wb8y3CZl35bwoHrUMgo=";
+    rev = version;
+    sha256 = "sha256-tG3Wl1AvwWhHmIIHgexv3mVVrmOwNrwn8k/sD4+WZzk";
   };
 
   nativeBuildInputs = [
@@ -62,13 +61,12 @@ stdenv.mkDerivation rec {
   ];
   dontWrapGApps = true;
 
-  postPatch = replaceAll "qt5/QtCore/qobjectdefs.h" "QtCore/qobjectdefs.h"
-    + ''
+  postPatch = ''
     patchShebangs .
 
     substituteInPlace src/plugins/filemanager/dfmplugin-vault/utils/vaultdefine.h \
       --replace "/usr/bin/deepin-compressor" "deepin-compressor"
-    
+
     substituteInPlace src/plugins/filemanager/dfmplugin-avfsbrowser/utils/avfsutils.cpp \
       --replace "/usr/bin/mountavfs" "mountavfs" \
       --replace "/usr/bin/umountavfs" "umountavfs"
@@ -81,23 +79,14 @@ stdenv.mkDerivation rec {
       --replace "/usr/bin/dde-desktop" "dde-desktop"
 
     substituteInPlace src/dfm-base/file/local/localfilehandler.cpp \
-      --replace "/usr/lib/deepin-daemon" "/run/current-system/sw/lib/deepin-daemon" \
-      --replace "/usr/bin/x-terminal-emulator" "x-terminal-emulator"
+      --replace "/usr/lib/deepin-daemon" "/run/current-system/sw/lib/deepin-daemon"
 
     substituteInPlace src/plugins/desktop/ddplugin-background/backgroundservice.cpp \
-      --replace "/usr/share/backgrounds" "/run/current-system/sw/share/backgrounds"
-
-    substituteInPlace src/plugins/desktop/ddplugin-wallpapersetting/wallpapersettings.cpp \
+      src/plugins/desktop/ddplugin-wallpapersetting/wallpapersettings.cpp \
       --replace "/usr/share/backgrounds" "/run/current-system/sw/share/backgrounds"
 
     find . -type f -regex ".*\\.\\(service\\|policy\\|desktop\\)" -exec sed -i -e "s|/usr/|$out/|g" {} \;
-
-    ######################
-    substituteInPlace src/dfm-base/CMakeLists.txt --replace "/usr" "$out"
   '';
-  # src/plugins/desktop/core/ddplugin-dbusregister/vaultmanagerdbus.cpp TODO
-  # src/plugins/desktop/ddplugin-grandsearchdaemon/CMakeLists.txt 
-  # src/plugins/daemon/daemonplugin-accesscontrol/utils.cpp
 
   buildInputs = [
     dtkwidget
@@ -107,8 +96,7 @@ stdenv.mkDerivation rec {
     dde-qt-dbus-factory
     glibmm
     docparser
-    dde-dock.dev
-    deepin-movie-reborn.dev
+    dde-dock
     qtx11extras
     qtmultimedia
     kcodecs
@@ -123,14 +111,15 @@ stdenv.mkDerivation rec {
     boost
     taglib
     cryptsetup
-  ];
-
-  env.NIX_CFLAGS_COMPILE = toString [
-    "-I${libuuid.dev}/include/libmount"
-    "-I${libuuid.dev}/include"
+    libuuid
+    libselinux
+    pcre
+    udisks2
+    libisoburn
   ];
 
   cmakeFlags = [
+    "-DVERSION=${version}"
     "-DDEEPIN_OS_VERSION=20"
   ];
 
@@ -138,11 +127,9 @@ stdenv.mkDerivation rec {
 
   qtWrapperArgs = [
     "--prefix QT_PLUGIN_PATH : ${qt5integration}/${qtbase.qtPluginPrefix}"
-    "--prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ mpv ffmpeg ffmpegthumbnailer gst_all_1.gstreamer gst_all_1.gst-plugins-base ]}"
   ];
 
   preFixup = ''
-    glib-compile-schemas ${glib.makeSchemaPath "$out" "${pname}-${version}"}
     qtWrapperArgs+=("''${gappsWrapperArgs[@]}")
   '';
 
@@ -151,5 +138,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/linuxdeepin/dde-file-manager";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
+    maintainers = teams.deepin.members;
   };
 }

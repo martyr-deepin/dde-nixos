@@ -49,7 +49,6 @@ let
     docparser = callPackage ./library/docparser { };
     dwayland = callPackage ./library/dwayland { };
     deepin-wayland-protocols = callPackage ./library/deepin-wayland-protocols { };
-    qt5integration-styles = callPackage ./library/qt5integration-styles { };
     dtkdeclarative = callPackage ./library/dtkdeclarative { };
     util-dfm = callPackage ./library/util-dfm { };
     deepin-pdfium = callPackage ./library/deepin-pdfium { };
@@ -100,7 +99,6 @@ let
 
     #### Dtk Application
     dde-grand-search = callPackage ./apps/dde-grand-search { };
-    dde-introduction = callPackage ./apps/dde-introduction { };
     deepin-compressor = callPackage ./apps/deepin-compressor { };
     deepin-terminal = callPackage ./apps/deepin-terminal { };
     deepin-editor = callPackage ./apps/deepin-editor { };
@@ -108,24 +106,17 @@ let
     deepin-movie-reborn = callPackage ./apps/deepin-movie-reborn { };
     deepin-album = callPackage ./apps/deepin-album { };
     deepin-image-viewer = callPackage ./apps/deepin-image-viewer { };
-    deepin-boot-maker = callPackage ./apps/deepin-boot-maker { };
     deepin-calculator = callPackage ./apps/deepin-calculator { };
     deepin-font-manager = callPackage ./apps/deepin-font-manager { };
     deepin-system-monitor = callPackage ./apps/deepin-system-monitor { };
     deepin-picker = callPackage ./apps/deepin-picker { };
     deepin-draw = callPackage ./apps/deepin-draw { };
     deepin-camera = callPackage ./apps/deepin-camera { };
-    deepin-devicemanager = callPackage ./apps/deepin-devicemanager { };
     deepin-screen-recorder = callPackage ./apps/deepin-screen-recorder { };
-    deepin-clone = callPackage ./apps/deepin-clone { };
     deepin-shortcut-viewer = callPackage ./apps/deepin-shortcut-viewer { };
-    deepin-downloader = callPackage ./apps/deepin-downloader { };
     deepin-voice-note = callPackage ./apps/deepin-voice-note { };
     deepin-reader = callPackage ./apps/deepin-reader { };
-    deepin-gomoku = callPackage ./apps/deepin-gomoku { };
-    deepin-lianliankan = callPackage ./apps/deepin-lianliankan { };
     deepin-ocr = callPackage ./apps/deepin-ocr { };
-    deepin-screen-recorder-next = callPackage ./apps/deepin-screen-recorder-next { };
 
     #### OS-SPECIFIC
     ## pkgs/top-level/linux-kernels.nix
