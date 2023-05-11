@@ -143,7 +143,6 @@
 
                   environment.systemPackages = with pkgs; with deepin; [
                     pciutils # startdde
-                    # socat
                     xdotool
                     glib # for gsettings program / gdbus
                     gtk3 # for gtk-launch program
@@ -184,15 +183,12 @@
                     dde-network-core
                     dde-clipboard
                     dde-calendar
-
                     startdde
                     dde-file-manager
                     deepin-desktop-schemas
-                    
                     deepin-music
                     deepin-movie-reborn
                     deepin-shortcut-viewer
-
                     deepin-compressor
                     deepin-system-monitor
                     deepin-screen-recorder
@@ -213,17 +209,15 @@
                     dde-dock
                     dde-session-ui
                     dde-session-shell
-                  ] ++ (with packages; (utils.removePackagesByName ([
-                    #dde-kwin
-                    #deepin-kwin
-                    libsForQt5.kwin
-
                     dde-file-manager
                     dde-calendar
-                    #deepin-screen-recorder
-                    #deepin-system-monitor
-                    #deepin-camera
+                    deepin-screen-recorder
+                    deepin-system-monitor
+                    deepin-camera
                     dde-clipboard
+                  ] ++ (with packages; (utils.removePackagesByName ([
+                    dde-kwin
+                    deepin-kwin
                   ]) config.environment.deepin.excludePackages));
 
                   systemd.packages = with pkgs.deepin; [
@@ -239,7 +233,6 @@
                   services.dde.dde-daemon.enable = mkForce true;
                   services.dde.dde-api.enable = mkForce true;
                   services.dde.app-services.enable = mkForce true;
-
                 })
 
                 (mkIf config.services.dde.dde-daemon.enable {
