@@ -18,13 +18,13 @@
 
 stdenv.mkDerivation rec {
   pname = "dtkgui";
-  version = "5.6.12";
+  version = "5.6.17";
 
   src = fetchFromGitHub {
     owner = "linuxdeepin";
     repo = pname;
     rev = version;
-    hash = "sha256-sYJWa4D2BMR/jriVdpDjIFd6e1hC4ttuTBM9oW7TJ6c=";
+    hash = "sha256-ssCVMFCE1vhucYMxXkEZV5YlFxT1JdYGqrzILhWX1XI=";
   };
 
   outputs = [ "out" "doc" ];

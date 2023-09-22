@@ -12,6 +12,7 @@
 , qtquickcontrols2
 , appstream-qt
 , kitemmodels
+, qt5integration
 }:
 
 stdenv.mkDerivation rec {
@@ -47,9 +48,9 @@ stdenv.mkDerivation rec {
     "-DSYSTEMD_USER_UNIT_DIR=${placeholder "out"}/lib/systemd/user"
   ];
 
-  #qtWrapperArgs = [
-  #  "--prefix QT_PLUGIN_PATH : ${qt5integration}/${qtbase.qtPluginPrefix}"
-  #];
+  qtWrapperArgs = [
+    "--prefix QT_PLUGIN_PATH : ${qt5integration}/${qtbase.qtPluginPrefix}"
+  ];
 
   meta = with lib; {
     description = "Deepin desktop-environment - Launcher module";
