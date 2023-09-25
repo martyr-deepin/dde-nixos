@@ -39,6 +39,7 @@
 , udisks2
 , libisoburn
 , gsettings-qt
+, fetchpatch
 }:
 
 stdenv.mkDerivation rec {
@@ -63,6 +64,11 @@ stdenv.mkDerivation rec {
 
   patches = [
     ./compile_on_v23.diff
+
+    (fetchpatch {
+      url = "https://github.com/linuxdeepin/dde-file-manager/commit/b6c210057d991591df45b80607a614e7a57a9dc0.patch";
+      hash = "sha256-k0ZYlOVN3hHs1qvvRaJ3i6okOhDE+DoUKGs9AhSFBGU=";
+    })
   ];
 
   postPatch = ''
