@@ -1,7 +1,6 @@
 { stdenv
 , lib
 , fetchFromGitHub
-, fetchpatch
 , pkg-config
 , cmake
 , qttools
@@ -14,6 +13,7 @@
 , qtimageformats
 , freeimage
 , libraw
+, fetchpatch
 }:
 
 stdenv.mkDerivation rec {
@@ -26,6 +26,14 @@ stdenv.mkDerivation rec {
     rev = version;
     hash = "sha256-ssCVMFCE1vhucYMxXkEZV5YlFxT1JdYGqrzILhWX1XI=";
   };
+
+  patches = [
+    (fetchpatch {
+      name = "fix_svg_with_filter_attribute_rendering_exception.patch";
+      url = "https://github.com/linuxdeepin/dtkgui/commit/f2c9327eb4989ab8ea96af7560c67d1cada794de.patch";
+      hash = "sha256-lfg09tgS4vPuYachRbHdaMYKWdZZ0lP0Hxakkr9JKGs=";
+    })
+  ];
 
   outputs = [ "out" "doc" ];
 
