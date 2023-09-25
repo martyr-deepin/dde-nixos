@@ -232,6 +232,7 @@
                         dde-widgets
                         dde-appearance
                         dde-application-manager
+                        dde-am
                         dde-permission-manager
                         deepin-service-manager
                       ];
@@ -270,6 +271,7 @@
                     dde-session
                     dde-appearance
                     dde-application-manager
+                    dde-am
                     dde-permission-manager
                     deepin-service-manager
                   ];
@@ -284,6 +286,7 @@
                     dde-widgets
                     dde-session
                     dde-application-manager
+                    dde-am
                     dde-permission-manager
                     deepin-service-manager
                   ];
