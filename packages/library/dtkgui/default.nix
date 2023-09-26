@@ -63,6 +63,7 @@ stdenv.mkDerivation rec {
     "-DBUILD_DOCS=ON"
     "-DMKSPECS_INSTALL_DIR=${placeholder "out"}/mkspecs/modules"
     "-DQCH_INSTALL_DESTINATION=${placeholder "doc"}/${qtbase.qtDocPrefix}"
+    "-DCMAKE_INSTALL_LIBEXECDIR=${placeholder "dev"}/libexec"
     #"-DCMAKE_INSTALL_LIBDIR=lib"
     #"-DCMAKE_INSTALL_INCLUDEDIR=include"
     #"-DDTK_DISABLE_LIBRSVG=OFF" # librsvg
