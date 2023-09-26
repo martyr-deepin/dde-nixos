@@ -62,6 +62,7 @@ stdenv.mkDerivation rec {
     "-DQCH_INSTALL_DESTINATION=${placeholder "doc"}/${qtbase.qtDocPrefix}"
     "-DDSG_PREFIX_PATH='/run/current-system/sw'"
     "-DMKSPECS_INSTALL_DIR=${placeholder "out"}/mkspecs/modules"
+    "-DPACKAGE_PREFIX_DIR=${placeholder "out"}"
     #"-DCMAKE_INSTALL_LIBDIR=lib"
     #"-DCMAKE_INSTALL_INCLUDEDIR=include"
     "-DD_DSG_APP_DATA_FALLBACK=/var/dsg/appdata"
